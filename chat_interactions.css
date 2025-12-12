@@ -1,0 +1,225 @@
+/* === DYNAMIC ANIMATED BACKGROUND - Google Colors Dark === */
+@keyframes backgroundShift {
+    0% {
+        background: radial-gradient(circle at 20% 50%, rgba(33, 102, 180, 0.25) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(26, 115, 232, 0.2) 0%, transparent 50%),
+            #050505;
+    }
+
+    25% {
+        background: radial-gradient(circle at 60% 30%, rgba(180, 33, 38, 0.25) 0%, transparent 50%),
+            radial-gradient(circle at 30% 70%, rgba(234, 67, 53, 0.15) 0%, transparent 50%),
+            #050505;
+    }
+
+    50% {
+        background: radial-gradient(circle at 40% 80%, rgba(180, 140, 0, 0.25) 0%, transparent 50%),
+            radial-gradient(circle at 70% 40%, rgba(251, 188, 4, 0.2) 0%, transparent 50%),
+            #050505;
+    }
+
+    75% {
+        background: radial-gradient(circle at 50% 50%, rgba(26, 115, 70, 0.25) 0%, transparent 50%),
+            radial-gradient(circle at 20% 20%, rgba(52, 168, 83, 0.2) 0%, transparent 50%),
+            #050505;
+    }
+
+    100% {
+        background: radial-gradient(circle at 20% 50%, rgba(33, 102, 180, 0.25) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(26, 115, 232, 0.2) 0%, transparent 50%),
+            #050505;
+    }
+}
+
+body {
+    animation: backgroundShift 30s ease-in-out infinite;
+}
+
+/* === INTERACTIVE MESSAGE EFFECTS === */
+.message {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+.message:hover {
+    transform: translateY(-4px) scale(1.02);
+    filter: brightness(1.1);
+}
+
+.message.bot:hover {
+    box-shadow: 0 15px 40px rgba(0, 198, 255, 0.3),
+        0 0 30px rgba(0, 198, 255, 0.2);
+    border-color: rgba(0, 198, 255, 0.4);
+}
+
+.message.user:hover,
+.user-message:hover {
+    box-shadow: 0 15px 40px rgba(0, 114, 255, 0.5),
+        0 0 30px rgba(0, 114, 255, 0.3);
+}
+
+/* Shake animation on double-click */
+@keyframes messageShake {
+
+    0%,
+    100% {
+        transform: translateX(0) translateY(-4px) scale(1.02);
+    }
+
+    25% {
+        transform: translateX(-5px) translateY(-4px) scale(1.02);
+    }
+
+    75% {
+        transform: translateX(5px) translateY(-4px) scale(1.02);
+    }
+}
+
+.message.shake {
+    animation: messageShake 0.3s ease-in-out;
+}
+
+/* === INTERACTIVE TABLE ROWS === */
+.chat-table tr {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+.chat-table tr:hover {
+    transform: scale(1.02);
+}
+
+.chat-table tr:hover td {
+    background: rgba(0, 198, 255, 0.15);
+    box-shadow: 0 8px 25px rgba(0, 198, 255, 0.2),
+        inset 0 0 20px rgba(0, 198, 255, 0.1);
+}
+
+/* Row click animation */
+@keyframes rowPulse {
+
+    0%,
+    100% {
+        transform: scale(1.02);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.chat-table tr.clicked {
+    animation: rowPulse 0.4s ease-in-out;
+}
+
+/* === ELASTIC BUTTON PHYSICS === */
+#send-btn {
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+#send-btn:hover {
+    transform: scale(1.15) rotate(-15deg);
+}
+
+#send-btn:active {
+    transform: scale(0.95) rotate(5deg);
+    animation: buttonBounce 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes buttonBounce {
+    0% {
+        transform: scale(0.95) rotate(5deg);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(-10deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+/* === INPUT CONTAINER INTERACTIVE === */
+.input-container {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.input-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 0 2px rgba(0, 198, 255, 0.3),
+        0 15px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* === HEADER INTERACTIVE ELEMENTS === */
+.app-header {
+    transition: all 0.3s ease;
+}
+
+.status-dot {
+    transition: all 0.3s ease;
+}
+
+.status-dot:hover {
+    transform: scale(1.5);
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+#sign-out-btn {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(66, 133, 244, 0.5);
+    border-radius: 12px;
+    padding: 8px 12px;
+    animation: signOutGlow 40s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+}
+
+#sign-out-btn:hover {
+    transform: scale(1.15) rotate(-5deg);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* === SCROLL INDICATOR === */
+.chat-area::after {
+    content: '';
+    position: fixed;
+    bottom: 140px;
+    right: 40px;
+    width: 40px;
+    height: 40px;
+    background: var(--primary-gradient);
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 198, 255, 0.4);
+    animation: scrollFloat 2s ease-in-out infinite;
+}
+
+@keyframes scrollFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* === ENHANCED AURORA EFFECTS === */
+.aurora-1,
+.aurora-2 {
+    transition: all 0.5s ease;
+}
+
+.aurora-1:hover,
+.aurora-2:hover {
+    opacity: 0.6;
+    filter: blur(60px);
+    transform: scale(1.2);
+}

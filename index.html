@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCal AI</title>
+
+    <!-- Fuente Premium: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Iconos Remix -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- Estilos Luxury -->
+    <link rel="stylesheet" href="style_v3.css">
+    <link rel="stylesheet" href="login_styles.css?v=1">
+    <link rel="stylesheet" href="chat_interactions.css?v=3">
+    <link rel="stylesheet" href="header_logo.css?v=1">
+    <link rel="stylesheet" href="settings_modal.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Login Screen -->
+        <section id="login-screen" class="screen active">
+            <div class="login-content">
+                <div class="logo-container" id="interactive-logo">
+                    <div class="logo-circle">
+                        <i class="ri-calendar-check-fill"></i>
+                    </div>
+                    <div class="logo-glow"></div>
+                </div>
+                <h1>Juancholendar AI</h1>
+                <p>Tu asistente inteligente para organizar tu vida.</p>
+                <button id="google-login-btn" class="btn-primary">
+                    <i class="ri-google-fill"></i> Continuar con Google
+                </button>
+            </div>
+            <div class="background-blobs">
+                <div class="blob blob-1"></div>
+                <div class="blob blob-2"></div>
+            </div>
+        </section>
+
+        <!-- Main Chat Screen -->
+        <section id="chat-screen" class="screen hidden">
+            <header class="app-header">
+                <div class="header-left">
+                    <div class="logo-header-container">
+                        <div class="avatar-bot">
+                            <i class="ri-calendar-check-fill"></i>
+                        </div>
+                        <div class="logo-text-container">
+                            <h2 class="logo-animated">Juancholendar</h2>
+                            <span class="status-badge-mini">
+                                <span class="status-dot"></span>
+                                AI Activo
+                            </span>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    <div class="header-right">
+        <button id="settings-btn" class="btn-icon" title="Configuración">
+            <i class="ri-settings-4-line"></i>
+        </button>
+        <button id="sign-out-btn" class="btn-icon" title="Cerrar Sesión">
+            <i class="ri-logout-box-r-line"></i>
+        </button>
+    </div>
+    </header>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Configuración</h3>
+                <button id="close-settings" class="btn-close"><i class="ri-close-line"></i></button>
+            </div>
+            <div class="modal-body">
+                <label>URL de IA (Ollama/Ngrok)</label>
+                <input type="text" id="ollama-url" placeholder="http://localhost:11434" value="http://localhost:11434">
+                <small>Si usas Ngrok, pega aquí tu URL (ej: https://xxxx.ngrok-free.app)</small>
+            </div>
+            <div class="modal-footer">
+                <button id="save-settings" class="btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="chat-area" id="chat-messages">
+        <!-- Messages will appear here -->
+        <div class="message bot-message welcome">
+            Hola, soy Juancholendar. ¿En qué puedo ayudarte a organizar hoy?
+        </div>
+    </main>
+
+    <footer class="input-area">
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Escribe aquí..." autocomplete="off">
+            <button id="send-btn">
+                <i class="ri-send-plane-fill"></i>
+            </button>
+        </div>
+    </footer>
+    </section>
+    </div>
+
+    <!-- Logo Animation Script -->
+    <script src="logo_animation.js"></script>
+
+    <!-- Chat Interactions Script -->
+    <script src="chat_interactions.js"></script>
+
+    <!-- Scripts con Cache Busting -->
+    <script src="auth.js?v=final"></script>
+    <script src="gemini_service.js?v=final"></script>
+    <script src="ollama_service.js?v=final"></script>
+    <script src="app.js?v=final"></script>
+    <!-- Google Identity Services (Load AFTER auth.js so callbacks are defined) -->
+    <script src="https://accounts.google.com/gsi/client" async defer onload="gisLoaded()"></script>
+    <script src="https://apis.google.com/js/api.js" async defer onload="gapiLoaded()"></script>
+</body>
+
+</html>
