@@ -126,7 +126,9 @@ async function chatWithOllama(userText, currentEvents) {
   try {
     const HOST = getOllamaHost();
     try {
-      await fetch(`${HOST}/api/tags`);
+      await fetch(`${HOST}/api/tags`, {
+        headers: { 'ngrok-skip-browser-warning': 'true' }
+      });
     } catch (connErr) {
       throw new Error(`No puedo conectar con Ollama en ${HOST}. Asegúrate que esté corriendo o revisa la URL en Configuración.`);
     }
@@ -148,7 +150,10 @@ async function chatWithOllama(userText, currentEvents) {
 
     const response = await fetch(`${HOST}/api/chat`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true'
+      },
       body: JSON.stringify(requestBody)
     });
 
