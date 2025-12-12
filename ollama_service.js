@@ -125,13 +125,9 @@ async function chatWithOllama(userText, currentEvents) {
 
   try {
     const HOST = getOllamaHost();
-    try {
-      await fetch(`${HOST}/api/tags`, {
-        headers: { 'ngrok-skip-browser-warning': 'true' }
-      });
-    } catch (connErr) {
-      throw new Error(`No puedo conectar con Ollama en ${HOST}. Asegúrate que esté corriendo o revisa la URL en Configuración.`);
-    }
+
+    // Skip connection pre-check (fails on CORS)
+    // Go directly to chat request
 
     const requestBody = {
       model: DEFAULT_MODEL,
@@ -143,13 +139,14 @@ async function chatWithOllama(userText, currentEvents) {
       format: "json",
       options: {
         temperature: 0.2,
-        num_predict: 32768, // Máximo positivo (evita error -1)
-        num_ctx: 32768 // Ventana de contexto masiva
+        num_predict: 32768,
+        num_ctx: 32768
       }
     };
 
     const response = await fetch(`${HOST}/api/chat`, {
       method: 'POST',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
         'ngrok-skip-browser-warning': 'true'
@@ -158,8 +155,12 @@ async function chatWithOllama(userText, currentEvents) {
     });
 
     if (!response.ok) {
-      const errData = await response.json();
-      throw new Error(`Error Ollama: ${errData.error || response.statusText}`);
+      let errorMsg = response.statusText;
+      try {
+        const errData = await response.json();
+        errorMsg = errData.error || errorMsg;
+      } catch (e) { }
+      throw new Error(`Error Ollama: ${errorMsg}`);
     }
 
     const data = await response.json();
