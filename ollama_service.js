@@ -148,8 +148,7 @@ async function chatWithOllama(userText, currentEvents) {
       method: 'POST',
       mode: 'cors',
       headers: {
-        'Content-Type': 'application/json',
-        'ngrok-skip-browser-warning': 'true'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(requestBody)
     });
