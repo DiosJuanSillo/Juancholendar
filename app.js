@@ -16,6 +16,19 @@ let lastFetchedEvents = [];
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
+    // Device Detection
+    const deviceBadge = document.getElementById('device-badge');
+    if (deviceBadge) {
+        const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        if (isMobile) {
+            deviceBadge.textContent = '📱 Móvil';
+            deviceBadge.classList.add('mobile');
+        } else {
+            deviceBadge.textContent = '💻 Escritorio';
+            deviceBadge.classList.add('desktop');
+        }
+    }
+
     loginBtn.addEventListener('click', () => window.authModule.login());
     signOutBtn.addEventListener('click', () => window.authModule.logout());
     window.authModule.setCallbacks(handleLoginSuccess, handleLogout);
