@@ -124,14 +124,8 @@ async function handleUserMessage() {
         // 1. Obtener eventos actuales para contexto (importante para que sepa si estás libre)
         await refreshEventsList(true);
 
-        // 2. Consultar a IA (Intenta Ollama Local primero, fallback a Gemini Cloud)
-        let decision;
-        try {
-            decision = await window.ollamaService.chat(text, lastFetchedEvents);
-        } catch (ollamaErr) {
-            console.warn('Ollama falló, usando Gemini como fallback:', ollamaErr.message);
-            decision = await window.geminiService.chat(text, lastFetchedEvents);
-        }
+        // 2. Consultar a IA (Ollama Local vía túnel)
+        const decision = await window.ollamaService.chat(text, lastFetchedEvents);
 
         // 3. Eliminar loading
         removeMessage(loadingId);

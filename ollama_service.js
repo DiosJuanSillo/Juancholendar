@@ -3,8 +3,8 @@
  * Requiere que Ollama se esté ejecutando en el equipo en el puerto 11434.
  */
 
-// URL por defecto: Cloudflare Tunnel (cambiar cuando reinicies cloudflared)
-const DEFAULT_OLLAMA_HOST = 'https://contests-nights-crossing-hunter.trycloudflare.com';
+// URL por defecto: Ngrok tunnel (cambiar cuando reinicies ngrok)
+const DEFAULT_OLLAMA_HOST = 'https://janiya-unalcoholized-lurline.ngrok-free.dev';
 const DEFAULT_MODEL = 'qwen3-coder:480b-cloud';
 
 function getOllamaHost() {
