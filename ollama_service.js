@@ -182,10 +182,8 @@ async function chatWithOllama(userText, currentEvents) {
 
   } catch (error) {
     console.error("Error Ollama Service:", error);
-    return {
-      response_text: `⚠️ **Error de Conexión Local**<br>Error técnico: ${error.message}`,
-      action: null
-    };
+    // LANZAR error para que app.js pueda hacer fallback a Gemini
+    throw new Error(`Ollama: ${error.message}`);
   }
 }
 
