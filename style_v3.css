@@ -565,20 +565,27 @@ header {
 
     /* Input Area Mobile */
     .input-area {
-        padding: 12px 16px 16px;
+        padding: 12px 16px;
+        padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
         border-radius: 0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(10, 11, 16, 0.95);
+        backdrop-filter: blur(20px);
     }
 
     .input-container {
-        padding: 6px;
-        gap: 8px;
+        padding: 8px 8px 8px 16px;
+        gap: 10px;
         border-radius: 50px;
         align-items: center;
     }
 
     #user-input {
         font-size: 16px;
-        padding: 8px 12px;
+        padding: 8px 0;
     }
 
     #send-btn {
@@ -590,6 +597,11 @@ header {
 
     #send-btn i {
         font-size: 1rem;
+    }
+
+    /* Adjust chat area padding for fixed input */
+    .chat-area {
+        padding-bottom: 120px;
     }
 
     /* Hide aurora on mobile for performance */
