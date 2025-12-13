@@ -121,13 +121,23 @@ async function handleUserMessage() {
     const loadingId = addBotLoading();
 
     try {
-        // 1. Obtener eventos actuales para contexto (importante para que sepa si estás libre)
+        // 1. Obtener eventos actuales para contexto
         await refreshEventsList(true);
 
-        // 2. Consultar a IA (Ollama Local vía túnel)
-        const decision = await window.ollamaService.chat(text, lastFetchedEvents);
+        // 2. Verificar si necesita búsqueda web
+        let webSearchContext = null;
+        if (window.webSearchService && window.webSearchService.needsSearch(text)) {
+            console.log('🔍 Detectada necesidad de búsqueda web...');
+            const searchQuery = window.webSearchService.extractQuery(text);
+            const searchResults = await window.webSearchService.search(searchQuery);
+            webSearchContext = window.webSearchService.format(searchResults);
+            console.log('📄 Resultados de búsqueda obtenidos');
+        }
 
-        // 3. Eliminar loading
+        // 3. Consultar a IA (Ollama Local vía túnel) con contexto de búsqueda si existe
+        const decision = await window.ollamaService.chat(text, lastFetchedEvents, webSearchContext);
+
+        // 4. Eliminar loading
         removeMessage(loadingId);
 
         // 4. Mostrar respuesta textual de Gemini

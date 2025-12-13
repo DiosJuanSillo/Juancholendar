@@ -17,7 +17,7 @@ function getOllamaHost() {
  * @param {Array} currentEvents - Lista de eventos actuales (contexto)
  * @returns {Promise<Object>} - Objeto con { text, action: { type, data } }
  */
-async function chatWithOllama(userText, currentEvents) {
+async function chatWithOllama(userText, currentEvents, webSearchContext = null) {
   const now = new Date();
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -119,7 +119,13 @@ async function chatWithOllama(userText, currentEvents) {
     2. **DÍAS PASADOS**: Si estamos a Martes y piden "Lunes a Viernes", empieza desde HOY (Martes) hasta el Viernes. ¡NO agendes para el Lunes pasado ni saltes al Lunes siguiente!
     3. **HOY**: Incluye el día de HOY en la planificación (aunque sea tarde, ajusta las horas restantes).
     4. **COHERENCIA**: No mezcles semanas. (Ej: No hagas Mie-Jue-Vie-Lun-Mar). Mantén el bloque contiguo.
-
+    ${webSearchContext ? `
+    
+    INFORMACIÓN DE BÚSQUEDA WEB (Usa esta información para responder preguntas de actualidad):
+    ${webSearchContext}
+    
+    Cuando uses esta información, cita la fuente si está disponible.
+    ` : ''}
     TU TURNO. RESPONDE SOLO EN JSON:
     `;
 
